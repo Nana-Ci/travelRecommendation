@@ -70,7 +70,10 @@ nav a{
 }
 #searchResults{
     width: 35%;
+    height: 350px;
     margin-left: 100px;
+    overflow: auto;
+
          
 }
 
