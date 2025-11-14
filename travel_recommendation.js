@@ -2,31 +2,60 @@ function searchDB() {
   const keyword = document.getElementById("searchInput").value;
   console.log('Search keyword:', keyword);
   
-  if (keyword.trim() !== "") {
+  if (keyword.trim() !== "" && ( 
+        keyword.trim() === "beach" ||
+        keyword.trim() === "temple" ||
+        keyword.trim() === "country"
+         )     
+    ) {
     findRecommendations(keyword);
+    document.getElementById("searchInput").value = "";
   } else {
-    console.log('Please enter a search keyword');
-    // Optionally clear previous results here
+    alert('Please enter beach, temple, or country');
+    // clear previous results here
+    document.getElementById("searchInput").value = "";
   }
 }
 
-function filterByKey(data, keyword) {
-    return data.filter(item => item[keyword] === value);
-}  
 
 function findRecommendations(keyword) {
   fetch('./travel_recommendation_api.json')
     .then(response => response.json())
-    .then(data => {
-      const results = data[keyword];      
+    
+    .then(data => {  
+            
+      console.log('Matching recommendations:', data.countries);      
+      // TODO: display results in the UI    
+
+        if(keyword==="country"){
+            const items = data.countries; 
+        
+            const destinationCards=
+                items.map (item =>{
+                    let cities = item.cities;
+                    console.log(cities);                              
+                    return cities.map(city =>
+                    `<div class="destinationCard">
+                        <div id="destinationImage">
+                        <img class="destinationImage" src="${city.imageUrl}" alt="${city.name}" style="width: 200px; height: auto;">
+                        </div>
+                        <h4>${city.name}</h4>
+                        <p>${city.description}</p>
+                        <button>Visit</button>
+                    </div>
+                    `).join('');                   
+                                    
+                }).join('');
+            document.getElementById("searchResults").innerHTML = destinationCards;   
+
+        } 
       
-      console.log('Matching recommendations:', results);
-      // TODO: display results in the UI
     })
-    .catch(error => console.error('Error fetching data:', error));
+    .catch(error => console.log('Error fetching data:', error));
 }
+
 
 // Wait for DOM to load before attaching event listener
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById("search-btn").addEventListener('click', searchDB);
+document.getElementById("search-btn").addEventListener('click', searchDB);
 });

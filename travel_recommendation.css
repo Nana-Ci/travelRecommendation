@@ -7,6 +7,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    overflow: hidden;
 }
 
 nav {
@@ -34,10 +35,38 @@ nav a{
     margin-top: 8px;
     margin-right: 16px;    
 }
+
+.destinationCard{
+    width: 100%;
+    margin-bottom: 30px;
+    
+}
+.destinationCard p{
+   font-size: small;
+}
+#destinationImage{
+    width:fit-content;
+}
 #content{
     padding-top: 15%;
     padding-left: 15%;
     color:rgb(249, 249, 249);
+}
+#textAndSearchResults{
+    display: flex;
+    flex-direction: row;
+}
+
+#left-sided{
+    width: 50%;
+}
+#left-sided p{
+    font-size: x-small;
+}
+#searchResults{
+    width: 25%;
+    margin-left: 100px;
+    overflow: scroll;     
 }
 
 #aboutUsText{
