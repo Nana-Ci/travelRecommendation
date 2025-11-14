@@ -37,9 +37,9 @@ function findRecommendations(keyword) {
                     return cities.map(city =>
                     `<div class="destinationCard">
                         <div id="destinationImage">
-                        <img class="destinationImage" src="${city.imageUrl}" alt="${city.name}" style="width: 200px; height: auto;">
+                        <img class="destinationImage" src="${city.imageUrl}" alt="${city.name}" style="width: 100px; height: auto;">
                         </div>
-                        <h4>${city.name}</h4>
+                        <h6>${city.name}</h6>
                         <p>${city.description}</p>
                         <button>Visit</button>
                     </div>
