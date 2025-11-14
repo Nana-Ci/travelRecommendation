@@ -1,0 +1,106 @@
+body, html {
+    height: 100%;
+}
+body {
+    background-image: linear-gradient(rgb(0,0,0,0.1), rgba(0, 0, 0, 0.5)), url("./AAeiCnG.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+nav {
+    background-color: rgba(14, 14, 14, 0.457);
+    overflow: hidden;
+    position:fixed;
+    top:0;
+    width: 100%;
+    left: 0;
+
+}
+nav a{
+    float: left;
+    display: block;
+    color: rgb(244, 237, 237);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+#search-box{
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;    
+}
+#content{
+    padding-top: 15%;
+    padding-left: 15%;
+    color:rgb(249, 249, 249);
+}
+
+#aboutUsText{
+    font-size: small;
+}
+
+#ourTeam{
+    margin-bottom: 0;
+}
+
+#cards{
+    display: flex;
+    flex-direction: row;     
+}
+
+.card{
+    background-color: rgba(0, 0, 0, 0.317);
+    display: flex;
+    flex-direction: row; 
+    padding: 12px 12px;
+    border-radius: 12px;
+    margin: 0 10px;
+        
+}
+.container{
+    padding: 0px 12px;    
+      
+}
+.container h4{
+   margin: 0;
+   padding: 0;   
+}
+.container p{
+    font-size: x-small;
+ }
+ .role{
+    background-color: rgba(155, 137, 74, 0.77);
+    border-radius: 15px;
+    width: 120px;    
+    text-align: center;    
+    padding: 3px 3px;
+    font-size: small;
+    vertical-align: bottom ;
+ }
+
+ .contactUsSection{
+    display: flex;
+    flex-direction: row;     
+ }
+ #contactForm{
+    margin-left: 40px;
+ }
+ #inputItems{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+ }
+ #inputItems button{
+    border-radius: 6px;
+    background-color: rgba(155, 137, 74, 0.77);
+    color: rgb(249, 249, 249);
+ }
+ #inputItems input{
+    background-color: rgb(249, 249, 249);
+    border-color: rgba(155, 137, 74, 0.77);
+ }

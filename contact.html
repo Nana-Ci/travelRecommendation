@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Recommendation</title>
+    <link rel="stylesheet" href="travel_recommendation.css">
+
+</head>
+<body>
+    <nav>
+    <a href = "index.html">Home</a>
+    <a href = "about.html">About Us</a>
+    <a href = "contact.html">Contact Us</a>
+    <div id= "search-box">
+    <input type="text" placeholder="Enter Destination/Keyword">
+    <button id="search-btn">Search</button>
+    <button id="reset-btn">Reset</button>
+    </div>
+    </nav>
+
+   <div id="content">
+        <div class="contactUsSection">
+            <div class="contactSectionTitle">
+                <h1>CONTACT US</h1>
+                <p>Get in touch</p>
+            </div>
+            
+            <form id="contactForm">
+                <fieldset>
+                    <legend>Contact Form</legend>
+                        <div id="inputItems">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" >
+                        
+                        <label for="email">Email</label>
+                        <input type="text" name="email">
+                        
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                        
+                        <button type="submit">Submit</button>
+                        </div>
+                
+                </fieldset>
+            </form>
+       </div>
+    </div>  
+    
+    
+    <script src="./trvel_recommendation.js"></script>
+</body>
+</html>
