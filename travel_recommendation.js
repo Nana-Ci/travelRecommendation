@@ -68,6 +68,10 @@ document.getElementById("search-btn").addEventListener('click', searchDB);
 
 function createHTMLToShow(){
     const userSearchInput=document.getElementById("searchInput").value;
+    if(userSearchInput=== ""){
+        alert("Please enter your keyword");
+        return;
+    }
     fetch('./travel_recommendation_api.json')
     .then(response => response.json())
     .then(data => {
@@ -87,7 +91,10 @@ function createHTMLToShow(){
         dataToShow = searchKWMatch(userSearchInput, dataToLook);
         showSearchResult(dataToShow);
     }
-    })
+    })    
+   
+      document.getElementById("searchInput").value = "";
+      
 }
 
 function searchKWMatch(keyword, data) {
@@ -109,7 +116,10 @@ function searchKWMatch(keyword, data) {
 
 function showSearchResult(data) {
   if (data.length === 0) {    
-    document.getElementById('searchInput').placeholder = "No match found";
+    document.getElementById('searchInput').placeholder = "No match found"; 
+    setTimeout(() => {
+        document.getElementById("searchInput").placeholder = "Type your search...";
+      }, 2000);   
     return;  // Stop further execution
   }
 
