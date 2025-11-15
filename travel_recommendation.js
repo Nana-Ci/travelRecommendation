@@ -1,3 +1,4 @@
+/**
 function searchDB() {
   const keyword = document.getElementById("searchInput").value;
   console.log('Search keyword:', keyword);
@@ -58,4 +59,74 @@ function findRecommendations(keyword) {
 // Wait for DOM to load before attaching event listener
 document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("search-btn").addEventListener('click', searchDB);
+});
+
+**/
+
+//START HERE----------------------------------------------------------
+
+
+function createHTMLToShow(){
+    const userSearchInput=document.getElementById("searchInput").value;
+    fetch('./travel_recommendation_api.json')
+    .then(response => response.json())
+    .then(data => {
+    if (userSearchInput === "country" || userSearchInput === "countries") {
+        dataToShow = data.countries.flatMap(country => country.cities);
+        showSearchResult(dataToShow);
+    } else if (userSearchInput === "temple" || userSearchInput === "temples") {
+        dataToShow = data.temples;
+        showSearchResult(dataToShow);
+    } else if (userSearchInput === "beach" || userSearchInput === "beaches") {
+        dataToShow = data.beaches;
+        showSearchResult(dataToShow);
+    } else {
+        const countryCities = data.countries.flatMap(country => country.cities);
+        const dataToLook = [...countryCities, ...data.temples, ...data.beaches];
+
+        dataToShow = searchKWMatch(userSearchInput, dataToLook);
+        showSearchResult(dataToShow);
+    }
+    })
+}
+
+function searchKWMatch(keyword, data) {
+  const cities = [];
+  const lowerKeyword = keyword.toLowerCase();
+
+  for (const item of data) {
+    if (
+      item.name.toLowerCase().includes(lowerKeyword) ||
+      item.description.toLowerCase().includes(lowerKeyword)
+    ) {
+      cities.push(item);
+    }
+  }
+
+  return cities;
+}
+
+
+function showSearchResult(data) {
+  if (data.length === 0) {    
+    document.getElementById('searchInput').placeholder = "No match found";
+    return;  // Stop further execution
+  }
+
+  const htmlToShow = data.map(city => `
+    <div class="destinationCard">
+      <div class="destinationImage">
+        <img src="${city.imageUrl}" alt="${city.name}" style="width: 100px; height: auto;">
+      </div>
+      <h6>${city.name}</h6>
+      <p>${city.description}</p>
+      <button>Visit</button>
+    </div>
+  `).join('');
+
+  document.getElementById("searchResults").innerHTML = htmlToShow;
+}
+// Wait for DOM to load before attaching event listener
+document.addEventListener('DOMContentLoaded', () => {
+document.getElementById("search-btn").addEventListener('click', createHTMLToShow);
 });
