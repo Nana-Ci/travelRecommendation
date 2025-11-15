@@ -78,7 +78,3 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("search-btn").addEventListener('click', createHTMLToShow);
 document.getElementById("reset-btn").addEventListener('click', resetInput)
 });
-
-
-
-
