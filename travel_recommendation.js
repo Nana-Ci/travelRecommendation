@@ -2,7 +2,7 @@
 
 
 function createHTMLToShow(){
-    const userSearchInput=document.getElementById("searchInput").value;
+    const userSearchInput=document.getElementById("searchInput").value.toLowerCase();
     if(userSearchInput=== ""){
         alert("Please enter your keyword");
         return;
@@ -93,3 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("search-btn").addEventListener('click', createHTMLToShow);
 document.getElementById("reset-btn").addEventListener('click', resetInput)
 });
+
+
+
+
