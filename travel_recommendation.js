@@ -1,6 +1,4 @@
-//START HERE----------------------------------------------------------
-
-
+// OnClick function
 function createHTMLToShow(){
     const userSearchInput=document.getElementById("searchInput").value.toLowerCase();
     if(userSearchInput=== ""){
@@ -26,23 +24,22 @@ function createHTMLToShow(){
         const countryCities = data.countries.flatMap(country => country.cities);
         const dataToLook = [...countryCities, ...data.temples, ...data.beaches];
 
-        dataToShow = searchKWMatch(userSearchInput, dataToLook);
-        
-        // TEST
+        dataToShow = searchKWMatch(userSearchInput, dataToLook);        
+       
         if (dataToShow.length === 0){
             document.getElementById('searchInput').placeholder = "No match found"; 
         setTimeout(() => {
             document.getElementById("searchInput").placeholder = "Type your search...";
         }, 2000); 
             }
-        //TEST
+        
         showSearchResult(dataToShow);
         resetInput();
     }
     })       
       
 }
-
+// Keyword-Match function
 function searchKWMatch(keyword, data) {
   const cities = [];
   const lowerKeyword = keyword.toLowerCase();
@@ -55,22 +52,10 @@ function searchKWMatch(keyword, data) {
       cities.push(item);
     }
   }
-
   return cities;
 }
-
-
+// Search Result Display function
 function showSearchResult(data) {
-    /** TEST
-  if (data.length === 0) {    
-    document.getElementById('searchInput').placeholder = "No match found"; 
-    setTimeout(() => {
-        document.getElementById("searchInput").placeholder = "Type your search...";
-      }, 2000);   
-    return;  // Stop further execution
-  }
-   TEST*/
-
   const htmlToShow = data.map(city => `
     <div class="destinationCard">
       <div class="destinationImage">
