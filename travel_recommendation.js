@@ -1,68 +1,3 @@
-/**
-function searchDB() {
-  const keyword = document.getElementById("searchInput").value;
-  console.log('Search keyword:', keyword);
-  
-  if (keyword.trim() !== "" && ( 
-        keyword.trim() === "beach" ||
-        keyword.trim() === "temple" ||
-        keyword.trim() === "country"
-         )     
-    ) {
-    findRecommendations(keyword);
-    document.getElementById("searchInput").value = "";
-  } else {
-    alert('Please enter beach, temple, or country');
-    // clear previous results here
-    document.getElementById("searchInput").value = "";
-  }
-}
-
-
-function findRecommendations(keyword) {
-  fetch('./travel_recommendation_api.json')
-    .then(response => response.json())
-    
-    .then(data => {  
-            
-      console.log('Matching recommendations:', data.countries);      
-      // TODO: display results in the UI    
-
-        if(keyword==="country"){
-            const items = data.countries; 
-        
-            const destinationCards=
-                items.map (item =>{
-                    let cities = item.cities;
-                    console.log(cities);                              
-                    return cities.map(city =>
-                    `<div class="destinationCard">
-                        <div id="destinationImage">
-                        <img class="destinationImage" src="${city.imageUrl}" alt="${city.name}" style="width: 100px; height: auto;">
-                        </div>
-                        <h6>${city.name}</h6>
-                        <p>${city.description}</p>
-                        <button>Visit</button>
-                    </div>
-                    `).join('');                   
-                                    
-                }).join('');
-            document.getElementById("searchResults").innerHTML = destinationCards;   
-
-        } 
-      
-    })
-    .catch(error => console.log('Error fetching data:', error));
-}
-
-
-// Wait for DOM to load before attaching event listener
-document.addEventListener('DOMContentLoaded', () => {
-document.getElementById("search-btn").addEventListener('click', searchDB);
-});
-
-**/
-
 //START HERE----------------------------------------------------------
 
 
@@ -78,22 +13,33 @@ function createHTMLToShow(){
     if (userSearchInput === "country" || userSearchInput === "countries") {
         dataToShow = data.countries.flatMap(country => country.cities);
         showSearchResult(dataToShow);
+        resetInput();
     } else if (userSearchInput === "temple" || userSearchInput === "temples") {
         dataToShow = data.temples;
         showSearchResult(dataToShow);
+        resetInput();
     } else if (userSearchInput === "beach" || userSearchInput === "beaches") {
         dataToShow = data.beaches;
         showSearchResult(dataToShow);
+        resetInput();
     } else {
         const countryCities = data.countries.flatMap(country => country.cities);
         const dataToLook = [...countryCities, ...data.temples, ...data.beaches];
 
         dataToShow = searchKWMatch(userSearchInput, dataToLook);
+        
+        // TEST
+        if (dataToShow.length === 0){
+            document.getElementById('searchInput').placeholder = "No match found"; 
+        setTimeout(() => {
+            document.getElementById("searchInput").placeholder = "Type your search...";
+        }, 2000); 
+            }
+        //TEST
         showSearchResult(dataToShow);
+        resetInput();
     }
-    })    
-   
-      document.getElementById("searchInput").value = "";
+    })       
       
 }
 
@@ -115,6 +61,7 @@ function searchKWMatch(keyword, data) {
 
 
 function showSearchResult(data) {
+    /** TEST
   if (data.length === 0) {    
     document.getElementById('searchInput').placeholder = "No match found"; 
     setTimeout(() => {
@@ -122,6 +69,7 @@ function showSearchResult(data) {
       }, 2000);   
     return;  // Stop further execution
   }
+   TEST*/
 
   const htmlToShow = data.map(city => `
     <div class="destinationCard">
@@ -136,7 +84,12 @@ function showSearchResult(data) {
 
   document.getElementById("searchResults").innerHTML = htmlToShow;
 }
+
+function resetInput(){
+    document.getElementById("searchInput").value = "";
+}
 // Wait for DOM to load before attaching event listener
 document.addEventListener('DOMContentLoaded', () => {
 document.getElementById("search-btn").addEventListener('click', createHTMLToShow);
+document.getElementById("reset-btn").addEventListener('click', resetInput)
 });
